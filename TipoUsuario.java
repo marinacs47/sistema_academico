@@ -20,7 +20,7 @@ public class TipoUsuario {
 	}
 
 	public void definirFuncionalidades(){
-
+		//definir funcionalidades
 	}
 
 }
