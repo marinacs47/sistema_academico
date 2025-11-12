@@ -17,15 +17,15 @@ class Usuario implements IAutenticacao(){
 	}
 
 	static{
-						TipoUsuario Administrador = new TipoUsuario("Administrador");
-						TipoUsuario Professor = new TipoUsuario("Professor");
-						TipoUsuario Aluno = new TipoUsuario("Aluno");
-						TipoUsuario Turma = new TipoUsuario("Turma");
+			TipoUsuario Administrador = new TipoUsuario("Administrador");
+			TipoUsuario Professor = new TipoUsuario("Professor");
+			TipoUsuario Aluno = new TipoUsuario("Aluno");
+			TipoUsuario Turma = new TipoUsuario("Turma");
 
-						usuarios.add(new Usuario("ADMIN", Administrador));
-						usuarios.add(new Usuario("Professor1", Professor));
-						usuarios.add(new Usuario("Professor2", Professor));
-						usuarios.add(new Usuario("Aluno1", Aluno));
+			usuarios.add(new Usuario("ADMIN", Administrador));
+			usuarios.add(new Usuario("Professor1", Professor));
+			usuarios.add(new Usuario("Professor2", Professor));
+			usuarios.add(new Usuario("Aluno1", Aluno));
 						usuarios.add(new Usuario("Aluno2", Aluno));
 						usuarios.add(new Usuario("Aluno3", Aluno));
 						usuarios.add(new Usuario("Aluno4", Aluno));
