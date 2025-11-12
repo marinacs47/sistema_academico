@@ -28,8 +28,8 @@ public class Professor extends Pessoa{
 		professores.remove(professor);
 	}
 
-	/*public Professor obter(Professor professor){
-		
-	}*/
+	public Professor obter(Professor professor){
+		professores.get(professor);
+	}
 
 }
