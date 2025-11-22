@@ -1,29 +1,77 @@
-import java.util.List;
-import java.util.ArrayList;
+package modelo.sistema_academico;
 
-class Turma {
-    private String codigo;
-    private Professor professor;
-    private List<aluno> alunos;
-    private static List<Turma>
-    
-    public Turma(String codigo, professor professor, List<aluno> alunos){
+import java.util.ArrayList;
+import java.util.List;
+
+public class Turma {
+  private String codigo;
+  private Professor professor;
+  private List<Aluno> alunos;
+  private static List<Turma> turmas = new ArrayList<>();
+  
+  public Turma(String codigo, String string, Professor professor, List<Aluno> alunos) {
         this.codigo = codigo;
         this.professor = professor;
-        this.alunos = alunos;
+        this.alunos = alunos != null ? alunos : new ArrayList<>();
+        turmas.add(this);
     }
-    
-    public String getCodigo(){
-        return this.codigo;
+  
+  public String getCodigo() {
+        return codigo;
     }
-    
-    public Professor getProfessor(){
-        return this.professor;
+
+  public Professor getProfessor() {
+        return professor;
     }
-    
-    public List<aluno> getAlunos(){
-        return this.alunos;
+
+  public List<Aluno> getAlunos() {
+        return alunos;
     }
-    
-    public inserirAluno (aluno Alunos)
+  
+  public void inserirAluno(Aluno aluno) {
+        alunos.add(aluno);
+    }
+
+  public void removerAluno(Aluno aluno) {
+        alunos.remove(aluno);
+    }
+  
+  public String listarAlunos() {
+        StringBuilder sb = new StringBuilder();
+        for (Aluno a : alunos) {
+            sb.append(a.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+  
+  public float obterMedia() {
+        if (alunos.isEmpty()) return 0;
+
+        float soma = 0;
+        for (Aluno a : alunos) {
+            soma += a.obterMedia();
+        }
+        return soma / alunos.size();
+    }
+  
+  public static List<Turma> getTurmas() {
+        return turmas;
+    }
+  
+  public static void inserir(Turma turma) {
+        turmas.add(turma);
+    }
+  
+  public static boolean remover(Turma turma) {
+        return turmas.remove(turma);
+    }
+  
+  public static Turma obter(Turma turma) {
+        for (Turma t : turmas) {
+            if (t.equals(turma)) {
+                return t;
+            }
+        }
+        return null;
+    }
 }
