@@ -1,45 +1,61 @@
-import java.util.List;
-import java.util.ArrayList;
+package modelo.sistema_academico;
 
-class Aluno {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Aluno extends Pessoa {
     private String matricula;
-    private List<float> notas;
-    private static List<Aluno> alunos;
+    private  List<Float> notas = new ArrayList<>();
+    private static List<Aluno> alunos = new ArrayList<>();
     
-    public Aluno(String matricula, String nome) {
+    public Aluno(String matricula,String nome) {
+        super(nome);
         this.matricula = matricula;
-        this.nome = nome;
     }
     
     public String getMatricula(){
-        return this.matricula;
+        return matricula;
     }
     
-    public List<float> getNotas(){
-        return this.notas;
+    public List<Float> getNotas(){
+        return notas;
     }
     
-    public void setNota(float valor ){
-        this.valor = ;
+    public void setNota(float valor){
+        notas.add(valor);
     }
     
-    public float obterMedia() {
-        
+    public float obterMedia(){
+        if(notas.isEmpty()){
+            return 0.0f;
+        }
+        float soma = 0;
+        for (float n : notas){
+            soma += n;
+        }
+        return soma / notas.size();
     }
     
     public static List<Aluno> getAlunos(){
-        return this.Aluno;
+        return alunos;
     }
     
-    public static inserir(Aluno alunos){
-    return void;
+    public static void inserir(Aluno aluno){
+        if(aluno != null){
+         alunos.add(aluno);   
+        }
     }
     
-    public static remover(Aluno alunos){
-    return void;
+    public static boolean remover(Aluno aluno){
+        return alunos.remove(aluno);     
     }
     
-    public static obter(Aluno alunos){
-    return Aluno;
+    public static Aluno obter(Aluno aluno) {
+        for (Aluno a : alunos) {
+            if (a.equals(aluno)) {
+                return a;
+            }
+        }
+        return null;
     }
 }
