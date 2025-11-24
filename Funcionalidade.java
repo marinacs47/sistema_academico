@@ -9,7 +9,18 @@ public class Funcionalidade{
 	private static List<Funcionalidade> funcionalidades = new ArrayList<>();
 
 
-	static{} //adicionar as funcionalidades
+	static{
+		funcionalidades.add(new Funcionalidade("CA", "Cadastrar Aluno");
+		funcionalidades.add(new Funcionalidade("CP", "Cadastrar Professor");
+		funcionalidades.add(new Funcionalidade("CT", "Cadastrar Turma");
+		funcionalidades.add(new Funcionalidade("LA", "Listar Alunos");
+		funcionalidades.add(new Funcionalidade("LP", "Listra Professores");
+		funcionalidades.add(new Funcionalidade("LT", "Listar Turmas");
+		funcionalidades.add(new Funcionalidade("RA", "Remover Aluno");
+		funcionalidades.add(new Funcionalidade("RP", "Remover Professor");
+		funcionalidades.add(new Funcionalidade("RT", "Remover Turma");
+
+	} 
 
 	public Funcionalidades(String codigo, String descricao){
 		this.codigo = codigo;
@@ -24,12 +35,11 @@ public class Funcionalidade{
 		return descricao;
 	}
 
-	public Funcionalidade getFuncionalidade(String codigo) { //buscar a funcionalidade que precisa através do código na lista funcionalidades
+	public Funcionalidade getFuncionalidade(String codigo) { 
 		for (Funcionalidade FUN : funcionalidades)
 			if(FUN.getCodigo().equals(codigo)){
 				return FUN;
 			}
 			return void;
 	}
-
 }
