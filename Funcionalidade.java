@@ -36,10 +36,10 @@ public class Funcionalidade{
 	}
 
 	public Funcionalidade getFuncionalidade(String codigo) { 
-		for (Funcionalidade FUN : funcionalidades)
-			if(FUN.getCodigo().equals(codigo)){
-				return FUN;
+		for (Funcionalidade f : funcionalidades)
+			if(f.getCodigo().equals(codigo)){
+				return f;
 			}
-			return void;
+			return null;
 	}
 }
