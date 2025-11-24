@@ -9,12 +9,12 @@ import javax.swing.JOptionPane;
 public class UsuarioUI{
 	
 	public static Usuario autenticar() {
-		String login = JOptioonPane.showInputDialog(null, "Login:");
+		String login = JOptionPane.showInputDialog(null, "Login:");
 		if(login == null){
 			return null;
 		}
 	
-		String senha = JOptioonPane.showInputDialog(null, "Senha:");
+		String senha = JOptionPane.showInputDialog(null, "Senha:");
 		if(senha == null){
 			return null;
 		}
