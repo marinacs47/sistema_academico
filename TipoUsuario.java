@@ -9,6 +9,7 @@ public class TipoUsuario {
 
 	public TipoUsuario(String nome) {
 		this.nome = nome;
+		definirFuncionalidades();
 	}
 
 	public String getNome(){
@@ -20,7 +21,7 @@ public class TipoUsuario {
 	}
 
 	public void definirFuncionalidades(){
-		//definir funcionalidades
+		
 	}
 
 }
