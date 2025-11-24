@@ -8,24 +8,28 @@ class Usuario implements IAutenticacao(){
 	private String login;
 	private String senha;
 	private TipoUsuario tipoUsuario;
-	private static List<Usuario> usuarios = new ArrayList<>();
+	public static List<Usuario> usuarios = new ArrayList<>();
 
-	public Usuario(String nome, String login, String senha, TipoUsuario tipoUsuario){
+	static{ 
+		usuarios.add(new Administrador("admin", "12345", "Administrador"));
+	}
+
+	public Usuario(String login, String senha, TipoUsuario tipoUsuario){
 		this.login = login;
-   this.senha = senha;
-		this.nome = nome;
+   this.senha = senha;
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	static{
-	}
-
-	public getTipoUsuario getTipoUsuario(){
-		return(tipoUsuario);
+	public TipoUsuario getTipoUsuario(){
+		return tipoUsuario;
 	}
 
 	public Usuario obter(String login, String senha){
-		
+		for (Usuario u : usuarios) {
+			if(u.autenticar(login, senha))
+				return u;
+		}
+				return null;
 	}
 
 @Override
