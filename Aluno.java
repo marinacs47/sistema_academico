@@ -8,10 +8,17 @@ public class Aluno extends Pessoa {
     private  List<Float> notas = new ArrayList<>();
     private static List<Aluno> alunos = new ArrayList<>();
     
+    static{
+        alunos.add(new Aluno("20242enel0335","Miguel"));
+        alunos.add(new Aluno("20242enel0336","Luisa"));
+        alunos.add(new Aluno("20242enel0337","Marina"));
+        alunos.add(new Aluno("20242enel0338","Gabriel"));
+        alunos.add(new Aluno("20242enel0339","Ana"));
+    }
+    
     public Aluno(String matricula,String nome) {
         super(nome);
         this.matricula = matricula;
-        alunos.add(this);
     }
     
     public String getMatricula(){
