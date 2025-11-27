@@ -1,4 +1,4 @@
-sistema_academico.visao;
+package sistema_academico.visao;
 
 import java.util.Scanner;
 
