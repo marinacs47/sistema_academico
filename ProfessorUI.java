@@ -1,39 +1,61 @@
 package sistema_academico.visao;
 
-import java.util.Scanner;
+import javax.swing.JOptionPane;
+import sistema_academico.modelo.Professor;
 
 public class ProfessorUI {
 
-    private Scanner scanner = new Scanner(System.in);
-
     public Professor criar() {
-        System.out.print("Digite o nome do professor: ");
-        String nome = scanner.nextLine();
+        String nome = JOptionPane.showInputDialog("Digite o nome do professor:");
+        if (nome == null) return null;
 
-        System.out.print("Digite o SIAPE do professor: ");
-        int siape = scanner.nextLine();
+        String siapeStr = JOptionPane.showInputDialog("Digite o SIAPE do professor:");
+        if (siapeStr == null) return null;
+
+        int siape;
+        try {
+            siape = Integer.parseInt(siapeStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "SIAPE deve ser um número!");
+            return null;
+        }
 
         return new Professor(siape, nome);
     }
 
     public void listar() {
-        System.out.println("Lista de professores:");
+        StringBuilder lista = new StringBuilder("Lista de Professores:\n\n");
+
         for (Professor professor : Professor.getProfessores()) {
-            System.out.println("SIAPE: " + professor.getSiape() + " | Nome: " + professor.getNome());
+            lista.append("SIAPE: ").append(professor.getSiape())
+                 .append("   |   Nome: ").append(professor.getNome())
+                 .append("\n");
         }
+
+        JOptionPane.showMessageDialog(null, lista.toString());
     }
 
     public Professor remover() {
-        System.out.print("Digite o SIAPE do professor a remover: ");
-        int siape = scanner.nextLine();
+        String siapeStr = JOptionPane.showInputDialog("Digite o SIAPE do professor a remover:");
+        if (siapeStr == null) return null;
 
-        Professor professor = Professor.obterProfessor(siape);
-        if (professor != null) {
-            Professor.removerProfessor(professor);
-            System.out.println("Professor removido com sucesso!");
-        } else {
-            System.out.println("Professor não encontrado.");
+        int siape;
+        try {
+            siape = Integer.parseInt(siapeStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "SIAPE inválido!");
+            return null;
         }
+
+        Professor professor = Professor.obter(siape);
+
+        if (professor != null) {
+            Professor.remover(professor);
+            JOptionPane.showMessageDialog(null, "Professor removido com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Professor não encontrado.");
+        }
+
         return professor;
     }
 }
