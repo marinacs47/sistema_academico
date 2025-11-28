@@ -1,37 +1,45 @@
 package sistema_academico.visao;
 
-import java.util.Scanner;
+import javax.swing.JOptionPane;
+import sistema_academico.modelo.Aluno;
 
 public class AlunoUI {
 
-    private Scanner scanner = new Scanner(System.in);
-
     public Aluno criar() {
-        System.out.print("Digite o nome do aluno: ");
-        String nome = scanner.nextLine();
+        String nome = JOptionPane.showInputDialog("Digite o nome do aluno:");
+        if (nome == null) return null;
 
-        System.out.print("Digite a matrícula do aluno: ");
-        String matricula = scanner.nextLine();
+        String matricula = JOptionPane.showInputDialog("Digite a matrícula do aluno:");
+        if (matricula == null) return null;
 
         return new Aluno(matricula, nome);
     }
 
     public void listar() {
-        System.out.println("Lista de alunos:");
-        for (Aluno aluno : Aluno.getAlunos()) { 
-            System.out.println("Matrícula: " + aluno.getMatricula() + " | Nome: " + aluno.getNome());
-        }
-    }
-    
-    public Aluno remover() {
-        System.out.print("Digite a matrícula do aluno a remover: ");
-        String matricula = scanner.nextLine();
+        StringBuilder lista = new StringBuilder("Lista de alunos:\n\n");
 
-        Aluno aluno = Aluno.obterAluno(matricula);
-        if (aluno != null) {
-            Aluno.removerAluno(aluno);
-            System.out.println("Aluno removido com sucesso!");
-        } else {
-            System.out.println("Aluno não encontrado.");
+        for (Aluno aluno : Aluno.getAlunos()) {
+            lista.append("Matrícula: ").append(aluno.getMatricula())
+                 .append("   |   Nome: ").append(aluno.getNome())
+                 .append("\n");
         }
+
+        JOptionPane.showMessageDialog(null, lista.toString());
+    }
+
+    public Aluno remover() {
+        String matricula = JOptionPane.showInputDialog("Digite a matrícula do aluno a remover:");
+        if (matricula == null) return null;
+
+        Aluno Aluno = Aluno.obter(a);
+
+        if (aluno != null) {
+            Aluno.remover(aluno);
+            JOptionPane.showMessageDialog(null, "Aluno removido com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Aluno não encontrado.");
+        }
+
         return aluno;
+    }
+}
