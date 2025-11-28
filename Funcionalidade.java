@@ -10,19 +10,19 @@ public class Funcionalidade{
 
 
 	static{
-		funcionalidades.add(new Funcionalidade("CA", "Cadastrar Aluno");
-		funcionalidades.add(new Funcionalidade("CP", "Cadastrar Professor");
-		funcionalidades.add(new Funcionalidade("CT", "Cadastrar Turma");
-		funcionalidades.add(new Funcionalidade("LA", "Listar Alunos");
-		funcionalidades.add(new Funcionalidade("LP", "Listra Professores");
-		funcionalidades.add(new Funcionalidade("LT", "Listar Turmas");
-		funcionalidades.add(new Funcionalidade("RA", "Remover Aluno");
-		funcionalidades.add(new Funcionalidade("RP", "Remover Professor");
-		funcionalidades.add(new Funcionalidade("RT", "Remover Turma");
+		funcionalidades.add(new Funcionalidade("CA", "Cadastrar Aluno"));
+		funcionalidades.add(new Funcionalidade("CP", "Cadastrar Professor"));
+		funcionalidades.add(new Funcionalidade("CT", "Cadastrar Turma"));
+		funcionalidades.add(new Funcionalidade("LA", "Listar Alunos"));
+		funcionalidades.add(new Funcionalidade("LP", "Listra Professores"));
+		funcionalidades.add(new Funcionalidade("LT", "Listar Turmas"));
+		funcionalidades.add(new Funcionalidade("RA", "Remover Aluno"));
+		funcionalidades.add(new Funcionalidade("RP", "Remover Professor"));
+		funcionalidades.add(new Funcionalidade("RT", "Remover Turma"));
 
 	} 
 
-	public Funcionalidades(String codigo, String descricao){
+	public Funcionalidade(String codigo, String descricao){
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
@@ -35,7 +35,7 @@ public class Funcionalidade{
 		return descricao;
 	}
 
-	public Funcionalidade getFuncionalidade(String codigo) { 
+	public static Funcionalidade getFuncionalidade(String codigo) { 
 		for (Funcionalidade f : funcionalidades)
 			if(f.getCodigo().equals(codigo)){
 				return f;
