@@ -7,15 +7,17 @@ public class Turma {
   private String codigo;
   private Professor professor;
   private List<Aluno> alunos;
-  private static List<Turma> turmas = new ArrayList<>();
+  private static List<Turma> turmas;
   
-  public Turma(String codigo, String string, Professor professor, List<Aluno> alunos) {
+  public Turma(String codigo,Professor professor, List<Aluno> alunos) {
         this.codigo = codigo;
         this.professor = professor;
         this.alunos = alunos != null ? alunos : new ArrayList<>();
-        turmas.add(this);
     }
-  
+
+   static{
+        turmas = new ArrayList<>();
+    }
   public String getCodigo() {
         return codigo;
     }
@@ -45,9 +47,9 @@ public class Turma {
     }
   
   public float obterMedia() {
-        if (alunos.isEmpty()) return 0;
+        if (alunos.isEmpty()) return 0.0f;
 
-        float soma = 0;
+        float soma = 0.0f;
         for (Aluno a : alunos) {
             soma += a.obterMedia();
         }
@@ -68,10 +70,10 @@ public class Turma {
   
   public static Turma obter(Turma turma) {
         for (Turma t : turmas) {
-            if (t.equals(turma)) {
-                return t;
-            }
+            if (t.getCodigo().equals(turma.getCodigo())) {
+            return t;
         }
+    }
         return null;
     }
 }
