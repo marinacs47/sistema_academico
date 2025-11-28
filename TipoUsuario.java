@@ -1,6 +1,5 @@
 package sistema_academico.modelo;
 
-import sistema_academico.modelo.TipoUsuario; 
 import java.util.List;
 import java.util.ArrayList;
 
