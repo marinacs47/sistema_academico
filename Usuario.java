@@ -24,7 +24,7 @@ class Usuario implements IAutenticacao{
 		return tipoUsuario;
 	}
 
-	public Usuario obter(String login, String senha){
+	public static Usuario obter(String login, String senha){
 		for (Usuario u : usuarios) {
 			if(u.autenticar(login, senha))
 				return u;
