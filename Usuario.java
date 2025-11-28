@@ -3,7 +3,7 @@ package sistema_academico.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-class Usuario implements IAutenticacao(){
+class Usuario implements IAutenticacao{
 
 	private String login;
 	private String senha;
@@ -11,12 +11,12 @@ class Usuario implements IAutenticacao(){
 	public static List<Usuario> usuarios = new ArrayList<>();
 
 	static{ 
-		usuarios.add(new Administrador("admin", "12345", new TipoUsuario("Administrador")));
+		usuarios.add(new Usuario("admin", "12345", new TipoUsuario("Administrador")));
 	}
 
 	public Usuario(String login, String senha, TipoUsuario tipoUsuario){
 		this.login = login;
-   this.senha = senha;
+   		this.senha = senha;
 		this.tipoUsuario = tipoUsuario;
 	}
 
