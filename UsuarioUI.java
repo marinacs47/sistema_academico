@@ -1,9 +1,6 @@
 package sistema_academico.visao;
 
 import sistema_academico.modelo.Usuario;
-import sistema_academico.modelo.TipoUsuario;
-import sistema_academico.modelo.Funcionalidade;
-
 import javax.swing.JOptionPane;
 
 public class UsuarioUI{
