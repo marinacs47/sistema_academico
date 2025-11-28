@@ -1,34 +1,52 @@
-sistema_academico.java;
+package sistema_academico.visao;
 
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import sistema_academico.modelo.Turma;
+import sistema_academico.modelo.Professor;
+import sistema_academico.modelo.Aluno;
 
 public class TurmaUI {
 
-    private Scanner scanner = new Scanner(System.in);
-
     public Turma criar() {
-        System.out.print("Digite o código da turma: ");
-        String codigo = scanner.nextLine();
+        String codigo = JOptionPane.showInputDialog("Digite o código da turma:");
+        if (codigo == null) return null;
 
-        System.out.print("Digite o SIAPE do professor responsável: ");
-        int siape = scanner.nextLine();
-        Professor professor = Professor.obterProfessor(siape);
+        String siapeStr = JOptionPane.showInputDialog("Digite o SIAPE do professor responsável:");
+        if (siapeStr == null) return null;
+
+        int siape;
+        try {
+            siape = Integer.parseInt(siapeStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "ERRO: o SIAPE deve ser um número inteiro.");
+            return null;
+        }
+
+        Professor professor = Professor.obter(siape);
+        if (professor == null) {
+            JOptionPane.showMessageDialog(null, "Professor não encontrado!");
+            return null;
+        }
 
         List<Aluno> alunos = new ArrayList<>();
         boolean adicionarMais = true;
+
         while (adicionarMais) {
-            System.out.print("Digite a matrícula do aluno: ");
-            String matricula = scanner.nextLine();
-            if (matricula.isEmpty()) {
+            String matricula = JOptionPane.showInputDialog(
+                    "Digite a matrícula do aluno\n(Deixe vazio e pressione OK para terminar):"
+            );
+
+            if (matricula == null || matricula.isEmpty()) {
                 adicionarMais = false;
             } else {
-                Aluno aluno = Aluno.obterAluno(matricula);
+                Aluno aluno = Aluno.obter(matricula);
                 if (aluno != null) {
                     alunos.add(aluno);
+                    JOptionPane.showMessageDialog(null, "Aluno adicionado!");
                 } else {
-                    System.out.println("Aluno não encontrado.");
+                    JOptionPane.showMessageDialog(null, "Aluno não encontrado!");
                 }
             }
         }
@@ -37,25 +55,31 @@ public class TurmaUI {
     }
 
     public void listar() {
-        System.out.println("Lista de turmas:");
+        StringBuilder lista = new StringBuilder("📚 Lista de Turmas:\n\n");
+
         for (Turma turma : Turma.getTurmas()) {
-            System.out.println("Código: " + turma.getCodigo() +
-                               " | Professor: " + turma.getProfessor().getNome() +
-                               " | Alunos: " + turma.getAlunos().size());
+            lista.append("Código: ").append(turma.getCodigo())
+                 .append("\nProfessor: ").append(turma.getProfessor().getNome())
+                 .append("\nQtd. Alunos: ").append(turma.getAlunos().size())
+                 .append("\n-----------------------------\n");
         }
+
+        JOptionPane.showMessageDialog(null, lista.toString());
     }
 
     public Turma remover() {
-        System.out.print("Digite o código da turma a remover: ");
-        String codigo = scanner.nextLine();
+        String codigo = JOptionPane.showInputDialog("Digite o código da turma a remover:");
+        if (codigo == null) return null;
+        
+        Turma turma = Turma.obter(codigo);
 
-        Turma turma = Turma.obterTurma(new Turma(codigo, null, new ArrayList<>()));
         if (turma != null) {
-            Turma.removerTurma(turma);
-            System.out.println("Turma removida com sucesso!");
+            Turma.remover(turma);
+            JOptionPane.showMessageDialog(null, "Turma removida com sucesso!");
         } else {
-            System.out.println("Turma não encontrada.");
+            JOptionPane.showMessageDialog(null, "Turma não encontrada!");
         }
+
         return turma;
     }
 }
