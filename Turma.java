@@ -8,16 +8,18 @@ public class Turma {
   private Professor professor;
   private List<Aluno> alunos;
   private static List<Turma> turmas;
-  
-  public Turma(String codigo,Professor professor, List<Aluno> alunos) {
+ 
+ static{
+     turmas = new ArrayList<>();
+ }
+ 
+  public Turma(String codigo, Professor professor, List<Aluno> alunos) {
         this.codigo = codigo;
         this.professor = professor;
         this.alunos = alunos != null ? alunos : new ArrayList<>();
+        turmas.add(this);
     }
-
-   static{
-        turmas = new ArrayList<>();
-    }
+ 
   public String getCodigo() {
         return codigo;
     }
@@ -29,7 +31,7 @@ public class Turma {
   public List<Aluno> getAlunos() {
         return alunos;
     }
-  
+ 
   public void inserirAluno(Aluno aluno) {
         alunos.add(aluno);
     }
@@ -37,7 +39,7 @@ public class Turma {
   public void removerAluno(Aluno aluno) {
         alunos.remove(aluno);
     }
-  
+ 
   public String listarAlunos() {
         StringBuilder sb = new StringBuilder();
         for (Aluno a : alunos) {
@@ -45,35 +47,39 @@ public class Turma {
         }
         return sb.toString();
     }
-  
+ 
   public float obterMedia() {
-        if (alunos.isEmpty()) return 0.0f;
+        if (alunos.isEmpty()) return 0;
 
-        float soma = 0.0f;
+        float soma = 0;
         for (Aluno a : alunos) {
             soma += a.obterMedia();
         }
         return soma / alunos.size();
     }
-  
+ 
   public static List<Turma> getTurmas() {
         return turmas;
     }
-  
+ 
   public static void inserir(Turma turma) {
         turmas.add(turma);
     }
-  
+ 
   public static boolean remover(Turma turma) {
         return turmas.remove(turma);
     }
-  
+ 
   public static Turma obter(Turma turma) {
         for (Turma t : turmas) {
-            if (t.getCodigo().equals(turma.getCodigo())) {
-            return t;
+            if (t.equals(turma)) {
+                return t;
+            }
         }
-    }
         return null;
     }
+    @Override
+    public String toString() {
+    return "Turma " + codigo + " - Professor: " + professor.getNome();
+}
 }
