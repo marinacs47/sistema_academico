@@ -19,6 +19,7 @@ funcionalidades.add(new Funcionalidade("LT", "Listar Turmas"));
 funcionalidades.add(new Funcionalidade("RA", "Remover Aluno"));
 funcionalidades.add(new Funcionalidade("RP", "Remover Professor"));
 funcionalidades.add(new Funcionalidade("RT", "Remover Turma"));
+funcionalidades.add(new Funcionalidade("SAIR", "Sair do Sistema"));
 
 }
 
@@ -36,10 +37,10 @@ return descricao;
 }
 
 public static Funcionalidade getFuncionalidade(String codigo) {
-for (Funcionalidade f : funcionalidades)
-if(f.getCodigo().equals(codigo)){
-return f;
-}
-return null;
-}
+	for (Funcionalidade f : funcionalidades){
+		if(f.getCodigo().equals(codigo)) {
+			return f;
+		}
+	}
+	return null;
 }
