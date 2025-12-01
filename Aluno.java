@@ -33,9 +33,9 @@ public class Aluno extends Pessoa {
         if(notas.isEmpty()){
             return 0.0f;
         }
-        float soma = 0;
-        for (float n : notas){
-            soma += n;
+        float soma = 0.0f;
+        for (float nota : notas){
+            soma += nota;
         }
         return soma / notas.size();
     }
@@ -44,24 +44,25 @@ public class Aluno extends Pessoa {
         return alunos;
     }
    
-    public static void inserir(Aluno aluno){
+    public static void inserirAluno(Aluno aluno){
         if(aluno != null){
          alunos.add(aluno);  
         }
     }
    
-    public static boolean remover(Aluno aluno){
+    public static boolean removerAluno(Aluno aluno){
         return alunos.remove(aluno);    
     }
    
-    public static Aluno obter(Aluno aluno) {
-        for (Aluno a : alunos) {
-            if (a.equals(aluno)) {
-                return a;
+    public static Aluno obterAluno(String matricula) {
+        for (Aluno aluno : alunos) {
+            if (aluno.getMatricula().equals(matricula)) {
+                return aluno;
             }
         }
         return null;
     }
+    
     @Override
     public String toString() {
     return "Matrícula: " + matricula + " | Nome: " + getNome();
