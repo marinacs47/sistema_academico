@@ -11,7 +11,8 @@ public class Usuario implements IAutenticacao {
     public static List<Usuario> usuarios = new ArrayList<>();
 
     static {
-        usuarios.add(new Usuario("admin", "12345", new TipoUsuario("Administrador")));
+        TipoUsuario tipoAdmin = new TipoUsuario("Administrador")
+        usuarios.add(new Usuario("admin", "12345", tipoAdmin);
     }
 
     public Usuario(String login, String senha, TipoUsuario tipoUsuario){
@@ -25,9 +26,10 @@ public class Usuario implements IAutenticacao {
     }
 
     public static Usuario obter(String login, String senha){
-        for (Usuario u : usuarios) {
-            if(u.autenticar(login, senha))
-                return u;
+        for (Usuario usuario : usuarios) {
+            if(usuario.getLogin().equals(login) && usuario.getSenha().equals(senha)){
+                return usuario;
+            }
         }
         return null;
     }
