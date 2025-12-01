@@ -1,6 +1,5 @@
 package sistema_academico.modelo;
 
-import sistema_academico.modelo.TipoUsuario;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -32,6 +31,7 @@ funcionalidades.add(Funcionalidade.getFuncionalidade("LT"));
 funcionalidades.add(Funcionalidade.getFuncionalidade("RA"));
 funcionalidades.add(Funcionalidade.getFuncionalidade("RP"));
 funcionalidades.add(Funcionalidade.getFuncionalidade("RT"));
+funcionalidades.add(Funcionalidade.getFuncionalidade("SAIR"));
 }
 }
 }
