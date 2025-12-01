@@ -16,8 +16,7 @@ public class Turma {
   public Turma(String codigo, Professor professor, List<Aluno> alunos) {
         this.codigo = codigo;
         this.professor = professor;
-        this.alunos = alunos != null ? alunos : new ArrayList<>();
-        turmas.add(this);
+        this.alunos = alunos;
     }
  
   public String getCodigo() {
@@ -42,18 +41,21 @@ public class Turma {
  
   public String listarAlunos() {
         StringBuilder sb = new StringBuilder();
-        for (Aluno a : alunos) {
-            sb.append(a.toString()).append("\n");
+        for (Aluno aluno : alunos) {
+            sb.append(aluno.getNome()).append("\n");
         }
         return sb.toString();
     }
  
   public float obterMedia() {
-        if (alunos.isEmpty()) return 0;
+        if (alunos.isEmpty()){
+          return 0.0f;
+        } 
+          
 
-        float soma = 0;
-        for (Aluno a : alunos) {
-            soma += a.obterMedia();
+        float soma = 0.0f;
+        for (Aluno aluno : alunos) {
+            soma += aluno.obterMedia();
         }
         return soma / alunos.size();
     }
@@ -62,18 +64,18 @@ public class Turma {
         return turmas;
     }
  
-  public static void inserir(Turma turma) {
+  public static void inserirTurma(Turma turma) {
         turmas.add(turma);
     }
  
-  public static boolean remover(Turma turma) {
+  public static boolean removerTurma(Turma turma) {
         return turmas.remove(turma);
     }
  
-  public static Turma obter(Turma turma) {
-        for (Turma t : turmas) {
-            if (t.equals(turma)) {
-                return t;
+  public static Turma obterTurma(String codigo) {
+        for (Turma turma : turmas) {
+            if (turma.getCodigo().equals(codigo) {
+                return turma;
             }
         }
         return null;
