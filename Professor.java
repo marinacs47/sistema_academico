@@ -13,8 +13,7 @@ public class Professor extends Pessoa {
 
     public Professor(int siape,String nome){
         super(nome);
-        this.siape = siape;
-        professores.add(this);  
+        this.siape = siape;  
     }
    
     public int getSiape(){
@@ -25,26 +24,27 @@ public class Professor extends Pessoa {
         return professores;
     }
    
-    public static void inserir(Professor professor){
-        if(professor != null){ //verificando se a lista tá vazia
+    public static void inserirProfessor(Professor professor){
+        if(professor != null){
          professores.add(professor);  
         }
     }
 
-    public static boolean remover(Professor professor){
+    public static boolean removerProfessor(Professor professor){
         return professores.remove(professor);    
     }
    
-    public static Professor obter(Professor professor) {
-    for (Professor p : professores) { //to buscando um professor da lista de professores
-        if (p.equals(professor)) { //aqui to comparando um professor p com o passado do método
-            return p; //se for igual, retorna p
+    public static Professor obter(int siape) {
+    for (Professor professor : professores) { 
+        if (professor.getSiape() == siape) { 
+            return professor; 
         }
     }
-        return null; // se nao,retorna nulo
+    return null;
     }
+
     @Override
     public String toString() {
     return "SIAPE: " + siape + " | Nome: " + getNome();
-}   
+    }   
 }
