@@ -15,7 +15,15 @@ public class UsuarioUI {
             String senha = JOptionPane.showInputDialog(null, "Digite sua Senha:", "Autenticacao", JOptionPane.QUESTION_MESSAGE);
             if (senha == null) System.exit(0);
 
-            Usuario usuario = Usuario.obter(login, senha);
+            String loginLimpo = login.trim();
+            String senhaLimpa = senha.trim();
+            
+            if (loginLimpo.isEmpty() || senhaLimpa.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Login e Senha não podem ser vazios!", "Erro", JOptionPane.ERROR_MESSAGE);
+                continue;
+            }
+
+            Usuario usuario = Usuario.obter(loginLimpo, senhaLimpa);
 
             if (usuario != null) {
                 return usuario;
