@@ -3,27 +3,47 @@ package sistema_academico.visao;
 import javax.swing.JOptionPane;
 import java.util.List;
 import sistema_academico.modelo.Aluno;
+import sistema_academico.modelo.MatriculaJaExisteException; 
 
 public class AlunoUI {
 
-    public static Aluno criar() {
-        
+    private static boolean isEntradaInvalida(String aluno) {
+        return aluno == null || aluno.isEmpty(); 
+    }
+
+    public static Aluno cadastrar() {
         String matricula = JOptionPane.showInputDialog("Digite a Matricula do Aluno:");
-        if (matricula == null) return null;
+        
+        if (isEntradaInvalida(matricula)) {
+            UsuarioUI.exibirMensagem("Cadastro cancelado ou Matrícula Inválida.");
+            return null;
+        }
 
         String nome = JOptionPane.showInputDialog("Digite o Nome do Aluno:");
-        if (nome == null) return null;
-
-        Aluno nvAluno = new Aluno(matricula, nome);
-
-        Aluno.inserirAluno(nvAluno);
         
-        UsuarioUI.exibirMensagem("Aluno cadastrado com sucesso!");
-        return novoAluno;
+        if (isEntradaInvalida(nome)) {
+            UsuarioUI.exibirMensagem("Cadastro cancelado ou Nome Inválido.");
+            return null;
+        }
+
+        Aluno novoAluno = new Aluno(matricula, nome); 
+        
+        try {
+            Aluno.inserirAluno(novoAluno); 
+            UsuarioUI.exibirMensagem("Aluno cadastrado com sucesso!");
+            return novoAluno;
+            
+        } catch (MatriculaJaExisteException e) { 
+            UsuarioUI.exibirMensagem("ERRO: A matrícula " + matricula + " já está cadastrada.");
+            return null;
+            
+        } catch (Exception e) {
+            UsuarioUI.exibirMensagem("ERRO INESPERADO ao cadastrar aluno: " + e.getMessage());
+            return null;
+        }
     }
 
     public static void listar() {
-        
         List<Aluno> alunos = Aluno.getAlunos();
         StringBuilder sb = new StringBuilder("--- LISTA DE ALUNOS ---\n");
 
@@ -39,16 +59,19 @@ public class AlunoUI {
     }
 
     public static void remover() {
-        
         String matricula = JOptionPane.showInputDialog("Digite a Matricula do aluno a ser removido:");
-        if (matricula == null) return;
+        
+        if (isEntradaInvalida(matricula)) {
+             UsuarioUI.exibirMensagem("Remoção cancelada ou Matrícula Inválida.");
+            return;
+        }
 
         Aluno aluno = Aluno.obterAluno(matricula);
         if (aluno != null) {
             Aluno.removerAluno(aluno);
-            UsuarioUI.exibirMensagem("Aluno removido com sucesso");
+            UsuarioUI.exibirMensagem("Aluno removido com sucesso!");
         } else {
-            UsuarioUI.exibirMensagem("Aluno nao encontrado.");
+            UsuarioUI.exibirMensagem("Aluno nao encontrado. Verifique a matrícula.");
         }
     }
 }
