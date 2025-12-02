@@ -7,8 +7,8 @@ import sistema_academico.modelo.MatriculaJaExisteException;
 
 public class AlunoUI {
 
-    private static boolean isEntradaInvalida(String aluno) {
-        return aluno == null || aluno.isEmpty(); 
+    private static boolean isEntradaInvalida(String entraada) {
+        return entrada == null || entrada.isEmpty(); 
     }
 
     public static Aluno cadastrar() {
