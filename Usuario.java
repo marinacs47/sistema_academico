@@ -11,8 +11,8 @@ public class Usuario implements IAutenticacao {
     public static List<Usuario> usuarios = new ArrayList<>();
 
     static {
-        TipoUsuario tipoAdmin = new TipoUsuario("Administrador")
-        usuarios.add(new Usuario("admin", "12345", tipoAdmin);
+        TipoUsuario tipoAdmin = new TipoUsuario("Administrador");
+        usuarios.add(new Usuario("admin", "12345", tipoAdmin));
     }
 
     public Usuario(String login, String senha, TipoUsuario tipoUsuario){
