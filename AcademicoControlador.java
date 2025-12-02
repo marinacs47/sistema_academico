@@ -1,48 +1,70 @@
 package sistema_academico.controle;
 
+import sistema_academico.modelo.Funcionalidade;
 import sistema_academico.modelo.Usuario;
-import sistema_academico.visao.UsuarioUI;
 import sistema_academico.visao.AlunoUI;
 import sistema_academico.visao.ProfessorUI;
 import sistema_academico.visao.TurmaUI;
+import sistema_academico.visao.UsuarioUI;
+
 public class AcademicoControlador {
 
     public void inicializar() {
-        UsuarioUI usuarioUI = new UsuarioUI();
-        Usuario usuario = usuarioUI.autenticar();
+        Usuario usuarioLogado = UsuarioUI.autenticar();
+        UsuarioUI.exibirMensagem("Bem-vindo, " + usuarioLogado.getLogin());
 
-        if (usuario != null) {
-            processarMenu(usuarioUI, usuario);
+        boolean executando = true;
+        while (executando) {
+            int opcao = UsuarioUI.exibirMenu(usuarioLogado);
+            processarMenu(usuarioLogado, opcao);
         }
     }
 
-    public void processarMenu(UsuarioUI usuarioUI, Usuario usuario) {
+    public void processarMenu(Usuario usuario, int opcao) {
+        var funcionalidades = usuario.getTipoUsuario().getFuncionalidades();
+        int index = opcao - 1;
 
-        AlunoUI alunoUI = new AlunoUI();
-        ProfessorUI professorUI = new ProfessorUI();
-        TurmaUI turmaUI = new TurmaUI();
+        if (index >= 0 && index < funcionalidades.size()) {
+            Funcionalidade func = funcionalidades.get(index);
+            String codigo = func.getCodigo();
 
-        int opcao;
-
-        do {
-            opcao = usuarioUI.exibirMenu(usuario);
-
-            switch (opcao) {
-                case 1: alunoUI.criar(); break;
-                case 2: professorUI.criar(); break;
-                case 3: turmaUI.criar(); break;
-                case 4: alunoUI.listar(); break;
-                case 5: professorUI.listar(); break;
-                case 6: turmaUI.listar(); break;
-                case 7: alunoUI.remover(); break;
-                case 8: professorUI.remover(); break;
-                case 9: turmaUI.remover(); break;
-                case 0: break;
-                default:
-                    usuarioUI.exibirMensagem("Opção inválida.");
+            switch (codigo) {
+                case "CA":
+                    AlunoUI.criar();
                     break;
+                case "LA":
+                    AlunoUI.listar();
+                    break;
+                case "RA":
+                    AlunoUI.remover();
+                    break;
+                case "CP":
+                    ProfessorUI.criar();
+                    break;
+                case "LP":
+                    ProfessorUI.listar();
+                    break;
+                case "RM":
+                    ProfessorUI.remover();
+                    break;
+                case "CT":
+                    TurmaUI.criar();
+                    break;
+                case "LT":
+                    TurmaUI.listar();
+                    break;
+                case "RT":
+                    TurmaUI.remover();
+                    break;
+                case "SAIR":
+                    UsuarioUI.exibirMensagem("Encerrando o sistema...");
+                    System.exit(0);
+                    break;
+                default:
+                    UsuarioUI.exibirMensagem("Funcionalidade nao implementada.");
             }
-
-        } while (opcao != 0);
+        } else {
+            UsuarioUI.exibirMensagem("Opcao invalida!");
+        }
     }
 }
