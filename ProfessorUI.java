@@ -3,29 +3,50 @@ package sistema_academico.visao;
 import javax.swing.JOptionPane;
 import java.util.List;
 import sistema_academico.modelo.Professor;
+import sistema_academico.modelo.SiapeJaExisteException; 
 
 public class ProfessorUI {
 
-    public static Professor criar() {
+    private static boolean isEntradaInvalida(String entrada) {
+        return entrada == null || entrada.trim().isEmpty(); 
+    }
+
+    public static Professor cadastrar() {
         String siapeStr = JOptionPane.showInputDialog("Digite o SIAPE do Professor:");
-        if (siapeStr == null) return null;
+        
+        if (isEntradaInvalida(siapeStr)) {
+            UsuarioUI.exibirMensagem("Cadastro cancelado ou SIAPE Inválido (não pode ser vazio).");
+            return null;
+        }
 
         int siape;
         try {
-            siape = Integer.parseInt(siapeStr);
+            siape = Integer.parseInt(siapeStr.trim()); 
         } catch (NumberFormatException e) {
-            UsuarioUI.exibirMensagem("SIAPE invalido. Deve ser um numero.");
+            UsuarioUI.exibirMensagem("SIAPE inválido. Deve ser um número inteiro.");
             return null;
         }
 
         String nome = JOptionPane.showInputDialog("Digite o Nome do Professor:");
-        if (nome == null) return null;
-
-        Professor nvProf = new Professor(siape, nome);
-        Professor.inserirProfessor(nvProf);
         
-        UsuarioUI.exibirMensagem("Professor cadastrado com sucesso!");
-        return nvProf;
+        if (isEntradaInvalida(nome)) {
+            UsuarioUI.exibirMensagem("Cadastro cancelado ou Nome Inválido (não pode ser vazio).");
+            return null;
+        }
+
+        Professor novoProf = new Professor(siape, nome.trim());
+        
+        try {
+            Professor.inserirProfessor(novoProf);
+            UsuarioUI.exibirMensagem("Professor cadastrado com sucesso!");
+            return novoProf;
+        } catch (SiapeJaExisteException e) {
+            UsuarioUI.exibirMensagem("ERRO: O SIAPE " + siape + " já está cadastrado.");
+            return null;
+        } catch (Exception e) {
+             UsuarioUI.exibirMensagem("ERRO INESPERADO ao cadastrar professor: " + e.getMessage());
+            return null;
+        }
     }
 
     public static void listar() {
@@ -45,20 +66,24 @@ public class ProfessorUI {
 
     public static void remover() {
         String siapeStr = JOptionPane.showInputDialog("Digite o SIAPE do professor a remover:");
-        if (siapeStr == null) return;
+        
+        if (isEntradaInvalida(siapeStr)) {
+             UsuarioUI.exibirMensagem("Remoção cancelada ou SIAPE Inválido.");
+            return;
+        }
         
         try {
-            int siape = Integer.parseInt(siapeStr);
+            int siape = Integer.parseInt(siapeStr.trim()); 
             Professor prof = Professor.obterProfessor(siape);
             
             if (prof != null) {
                 Professor.removerProfessor(prof);
                 UsuarioUI.exibirMensagem("Professor removido com sucesso!");
             } else {
-                UsuarioUI.exibirMensagem("Professor nao encontrado.");
+                UsuarioUI.exibirMensagem("Professor não encontrado. Verifique o SIAPE.");
             }
         } catch (NumberFormatException e) {
-            UsuarioUI.exibirMensagem("SIAPE invalido.");
+            UsuarioUI.exibirMensagem("SIAPE inválido. Deve ser um número.");
         }
     }
 }
