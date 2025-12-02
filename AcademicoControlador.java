@@ -44,7 +44,7 @@ public class AcademicoControlador {
                 case "LP":
                     ProfessorUI.listar();
                     break;
-                case "RM":
+                case "RP":
                     ProfessorUI.remover();
                     break;
                 case "CT":
